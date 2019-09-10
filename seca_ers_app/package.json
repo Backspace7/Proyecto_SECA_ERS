@@ -1,0 +1,42 @@
+{
+  "name": "seca_ers_app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@feathersjs/authentication-client": "^1.0.11",
+    "@feathersjs/feathers": "^3.3.1",
+    "@feathersjs/rest-client": "^1.4.7",
+    "@feathersjs/socketio-client": "^1.2.1",
+    "aor-feathers-client": "^2.0.5",
+    "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "ra-data-json-server": "^2.9.6",
+    "react": "^16.9.0",
+    "react-admin": "^2.9.6",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1",
+    "recharts": "^1.7.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
