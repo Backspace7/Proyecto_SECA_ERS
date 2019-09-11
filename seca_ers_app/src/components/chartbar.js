@@ -11,7 +11,8 @@ import {ResponsiveContainer,
         YAxis, 
         CartesianGrid, 
         Tooltip, 
-        Legend } from 'recharts';
+        Legend,
+        BarChart   } from 'recharts';
 
 import {FormControl,
         InputLabel,
@@ -35,15 +36,15 @@ const Storelist = ({payload}) => (
             return (
               <div style={{ width: '100%', height: 300 }}>
                   <ResponsiveContainer>
-                    <ComposedChart width={300} height={300} data={result} margin={{ top: 10, right: 10, bottom: 10, left: 10,}}>
+                    <BarChart  width={300} height={300} data={result} margin={{ top: 10, right: 10, bottom: 10, left: 10,}}>
                       <CartesianGrid stroke="#f5f5f5" />
-                      <XAxis dataKey="Hour" />
                       <YAxis />
+                      <XAxis dataKey="Hour" />
                       <Tooltip />
-                      <Legend />
                       <CartesianGrid strokeDasharray="3 3" />
-                      <Area type="monotone" dataKey="Data"  fill="#8884d8" stroke="#82ca9d" />
-                    </ComposedChart>
+                      <Legend />
+                      <Bar type="monotone" dataKey="Data"  fill="#82ca9d" stroke="#8884d8" barSize={30} />
+                    </BarChart >
                   </ResponsiveContainer>
               </div>
             );
@@ -54,7 +55,7 @@ const Storelist = ({payload}) => (
 
 
 
-class Chart extends React.Component {
+class Chartbar extends React.Component {
   constructor(props){
    super(props);
    this.state = { s_uid: '1', t_uid:'2', sensors:[], };
@@ -78,7 +79,7 @@ handleChange2 = event => {
     }; 
     return (
     
-      <div style={{ width: '90%', height: 400 ,background:'white',padding:'20px', 'border-radius':'10px',margin: '15px' }}>
+      <div style={{ width: '90%', height: 400 ,background:'white',padding:'20px','border-radius':'10px',margin: '15px' }}>
         
         {console.log("this data",this.props.sensorsuids)}
         <div>
@@ -110,4 +111,4 @@ handleChange2 = event => {
     );
   }
 }
-export default Chart;
+export default Chartbar;

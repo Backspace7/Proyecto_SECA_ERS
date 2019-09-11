@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Chart from './chart';
+import Chartbar from './chartbar';
+import Chartscatter from './chartscatter';
 import {Query,Loading} from 'react-admin';
 import Paper from '@material-ui/core/Paper';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -21,7 +23,22 @@ const Sensorlist  = () =>(
               if (error) { return <p>ERROR</p>; }
               var sensorsuids = data.map(values => ({ value: values.id, location: values.location, label:values.description }));
               console.log("inter",sensorsuids);
-              return ( <div>{<Chart sensorsuids={sensorsuids}/>}</div>);
+              return (
+              <Grid container spacing={3}>
+              	<Grid  item sm={12}  spacing={3}>
+              			{<Chartbar sensorsuids={sensorsuids}/>}
+                </Grid >
+		        <Grid  item sm={12} spacing={3}>
+			        <div>
+			        	{<Chart sensorsuids={sensorsuids}/>}
+			        </div>
+		        </Grid >
+		        <Grid  item sm={12} spacing={3}>
+		            <div>
+		            	{<Chartscatter sensorsuids={sensorsuids}/>}		        		
+		           	</div>
+		        </Grid >
+		      </Grid>);
           }}
   </Query>
  );
@@ -30,27 +47,12 @@ const Sensorlist  = () =>(
 export default () => (
 	   			
     <div >
-      <Grid container spacing={3}>
-        <Grid  item sm={12}  spacing={3}>
-        	
-         	<Sensorlist/>
-         		
-     		
-        </Grid >
-
-        <Grid  item sm={12} spacing={3}>
-	    	
-	         <Sensorlist/>
-	         
-     		
-        </Grid >
-        <Grid  item sm={12} spacing={3}>
-          <Sensorlist/>
-          
-     		
-        </Grid >
-      </Grid>
       
+                	
+			         	
+    		<Sensorlist/>
+      
+
     </div>
     
     
