@@ -17,8 +17,10 @@ import {List,
 const SensorFilter = (props) => (
     <Filter {...props}>
       <TextInput label="Search" source="id" alwaysOn />
-      <TextInput label="type" source="type" defaultValue=" type " />
       <TextInput label="suid" source="suid" defaultValue=" suid " />
+      <ReferenceInput label="types" source="tuid" reference="sen-types" allowEmpty>
+            <SelectInput optionText="type" />
+        </ReferenceInput>
     </Filter>
 );
 

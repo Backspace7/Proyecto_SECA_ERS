@@ -70,9 +70,10 @@ handleChange2 = event => {
 
   render() {
     const payload ={
+
        filter:{'suid':this.state.s_uid},
-       pagination: { page: 1, perPage: 10 },
-       sort: { field: 'createdAt', order: 'ASC' },
+       pagination: { page: 1, perPage: 15 },
+       sort: { field: 'createdAt', order: 'DESC' },
     }; 
     return (
     

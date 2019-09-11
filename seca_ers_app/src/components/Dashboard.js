@@ -6,8 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Chart from './chart';
 import {Query,Loading} from 'react-admin';
-
-
+import Paper from '@material-ui/core/Paper';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 const payload2 ={
    pagination: { page: 1, perPage: 10 },
    sort: { field: 'id', order: 'ASC' },
@@ -27,15 +27,32 @@ const Sensorlist  = () =>(
  );
 
 
-
 export default () => (
 	   			
-    <Card>
-        <CardHeader title="Measures Graphs" />
+    <div >
+      <Grid container spacing={3}>
+        <Grid  item sm={12}  spacing={3}>
+        	
+         	<Sensorlist/>
+         		
+     		
+        </Grid >
 
-        <CardContent> 
-        	<Sensorlist/>
-		</CardContent>
-    </Card>
+        <Grid  item sm={12} spacing={3}>
+	    	
+	         <Sensorlist/>
+	         
+     		
+        </Grid >
+        <Grid  item sm={12} spacing={3}>
+          <Sensorlist/>
+          
+     		
+        </Grid >
+      </Grid>
+      
+    </div>
     
+    
+
 );

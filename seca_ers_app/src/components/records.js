@@ -14,15 +14,30 @@ import {List,
         SelectInput,
         ReferenceInput,
         DateField,
-        NumberInput
+        NumberInput,
+        DateTimeInput,
+        DateInput
         } from 'react-admin';
 
-const redirect = (basePath, id, data) => '/records';
+	const redirect = (basePath, id, data) => '/records';
+
+	var date_now = new Date(1568200000000);
+	date_now.setDate(date_now.getDate() +1);
+	var date_now = date_now.toISOString().substr(0,10);
+
+
 
 const RecordFilter = (props) => (
     <Filter {...props}>
-      <TextInput label="Tipo" source="tuid" alwaysOn />
-      <TextInput label="Sensor" source="suid" placeholder=" suid " />
+
+    	<ReferenceInput label="sensors" source="suid" reference="sensors" allowEmpty>
+		    <SelectInput optionText="suid" />
+		</ReferenceInput>
+		<ReferenceInput label="types" source="tuid" reference="sen-types" allowEmpty>
+		    <SelectInput optionText="type" />
+		</ReferenceInput>
+		<DateTimeInput  label="Date Time" source="createdAt"  /> 
+    	
     </Filter>
 );
 
@@ -31,7 +46,6 @@ export const RecordList = props => (
         <Datagrid rowClick="edit">
             <NumberField source="dat" />
             <DateField source="createdAt" showTime/>
-            <DateField source="updatedAt" />
             <ReferenceField source="suid" reference="sensors">
                 <TextField source="suid" />
             </ReferenceField>
@@ -57,6 +71,7 @@ export const RecordEdit = props => (
 );
 
 export const RecordCreate = props => (
+	
     <Create {...props}>
         <SimpleForm redirect={redirect}>
             <NumberInput source="dat" />
@@ -66,6 +81,7 @@ export const RecordCreate = props => (
             <ReferenceInput source="tuid" reference="sen-types">
                 <SelectInput optionText="type" />
             </ReferenceInput>
+            <DateTimeInput source="createdAt" defaultValue={date_now} />
         </SimpleForm>
     </Create>
 );
