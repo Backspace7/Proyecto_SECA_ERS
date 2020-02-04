@@ -23,8 +23,8 @@ const SentypesFilter = (props) => (
 export const SentypeEdit = props => (
     <Edit {...props}>
         <SimpleForm redirect={redirect}>
-            <TextInput source="description" />
             <TextInput source="type" />
+            <TextInput source="description" />
         </SimpleForm>
     </Edit>
 );
@@ -33,8 +33,8 @@ export const SentypeList = props => (
     <List filters={<SentypesFilter/>} {...props}>
         <Datagrid rowClick="edit">
         	<NumberField source="id" />
-            <TextField source="description" />
             <TextField source="type" />
+            <TextField source="description" />
             <DateField source="createdAt" />
             <DateField source="updatedAt" />
         </Datagrid>
@@ -52,8 +52,8 @@ export const SentypeCreate = props => (
 export const SentypeShow = props => (
     <Show {...props}>
         <SimpleShowLayout>
-            <TextField source="description" />
             <TextField source="type" />
+            <TextField source="description" />
             <DateField source="createdAt" />
             <DateField source="updatedAt" />
         </SimpleShowLayout>
