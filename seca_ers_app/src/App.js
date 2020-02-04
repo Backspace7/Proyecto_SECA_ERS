@@ -10,6 +10,7 @@ import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import StorageIcon from '@material-ui/icons/Storage';
+import TestComp from './components/TestComp';
 
 
 
@@ -39,7 +40,10 @@ const App = () => (
         <Resource name="sen-types" list={SentypeList} edit={SentypeEdit} create={SentypeCreate} show={SentypeShow} icon={FormatListBulletedIcon}/>
         <Resource name="sensors" list={SensorList} edit={SensorEdit} create={SensorCreate} show={SensorShow} icon={SettingsRemoteIcon}/>
         <Resource name="records" list={RecordList} edit={RecordEdit} create={RecordCreate} show={ShowGuesser} icon={StorageIcon}/>
+        <Resource name="extra" show={TestComp} icon={StorageIcon}/>
+        
   </Admin>
+
 );
 
 export default App;

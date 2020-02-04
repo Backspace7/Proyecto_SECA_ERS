@@ -78,7 +78,7 @@ handleChange2 = event => {
     }; 
     return (
     
-      <div style={{ width: '90%', height: 400 ,background:'white',padding:'40px', 'border-radius':'10px',margin: '20px' }}>
+      <div style={{ width: '90%', height: 200 ,background:'white',padding:'20px', 'borderRadius':'10px',margin: '20px' }}>
         
         {console.log("this data",this.props.sensorsuids)}
         <div>

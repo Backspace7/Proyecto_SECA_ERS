@@ -1,6 +1,8 @@
 import React from 'react';
 import { Query,Loading} from 'react-admin';
 import Moment from 'moment';
+import TestComp from './TestComp';
+
 
 import {ResponsiveContainer, 
         ComposedChart, 
@@ -30,7 +32,7 @@ const Storelist = ({payload}) => (
         {({ data, total, loading, error }) => {
             if (loading) { return <Loading />; }
             if (error) { return <p>ERROR</p>; }
-            console.log("data ->",data)
+
             var result = data.map(values => ({ Data: values.dat, Hour:Moment(values.createdAt).format('hh:mm a') }));
             
             return (
@@ -38,12 +40,12 @@ const Storelist = ({payload}) => (
                   <ResponsiveContainer>
                     <BarChart  width={300} height={300} data={result} margin={{ top: 10, right: 10, bottom: 10, left: 10,}}>
                       <CartesianGrid stroke="#f5f5f5" />
-                      <YAxis />
+                      <YAxis domain={['auto', 'auto']}  type="number"/>
                       <XAxis dataKey="Hour" />
                       <Tooltip />
                       <CartesianGrid strokeDasharray="3 3" />
                       <Legend />
-                      <Bar type="monotone" dataKey="Data"  fill="#82ca9d" stroke="#8884d8" barSize={30} />
+                      <Bar type="monotone" dataKey="Data"  fill="#8884d8" stroke="#82ca9d" barSize={30} />
                     </BarChart >
                   </ResponsiveContainer>
               </div>
@@ -61,7 +63,6 @@ class Chartbar extends React.Component {
    this.state = { s_uid: '1', t_uid:'2', sensors:[], };
   }
 handleChange1 = event => {
-  console.log("event",event)
    this.setState({ s_uid: event.target.value });
 };
 handleChange2 = event => {
@@ -74,14 +75,13 @@ handleChange2 = event => {
     const payload ={
 
        filter:{'suid':this.state.s_uid},
-       pagination: { page: 1, perPage: 15 },
+       pagination: { page: 1, perPage: 24 },
        sort: { field: 'createdAt', order: 'DESC' },
     }; 
     return (
     
-      <div style={{ width: '90%', height: 400 ,background:'white',padding:'40px','border-radius':'10px',margin: '20px' }}>
+      <div style={{ width: '90%', height: 200,background:'white',padding:'20px','borderRadius':'10px',margin: '20px' }}>
         
-        {console.log("this data",this.props.sensorsuids)}
         <div>
           
           <form  autoComplete="off" >
