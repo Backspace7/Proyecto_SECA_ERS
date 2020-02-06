@@ -33,7 +33,7 @@ const Storelist = ({payload}) => (
             if (loading) { return <Loading />; }
             if (error) { return <p>ERROR</p>; }
 
-            var result = data.map(values => ({ Data: values.dat, Hour:Moment(values.createdAt).format('hh:mm a') }));
+            var result = data.map(values => ({ Data: values.dat, Hour:Moment(values.createdAt).format('HH:mm DD/MM') }));
             
             return (
               <div style={{ width: '100%', height: 300 }}>
