@@ -74,13 +74,12 @@ class InformData extends React.Component {
   QueryData(){
     console.log("props",this.props.DateFrom,this.props.DateTo);
     console.log("props",this.props.TimeFrom,this.props.TimeTo);
-    var url="http://localhost:3030/records?$limit=144&createdAt[$gt]='"+this.props.DateFrom+" "+this.props.TimeFrom+":00.340Z'&createdAt[$lt]='"+this.props.DateTo+" "+this.props.TimeTo+":00.340Z'&suid="+this.props.SensId+"&$sort[createdAt]=-1";
+    var url="http://localhost:3030/records?[$limit]=144&createdAt[$gt]='"+this.props.DateFrom+" "+this.props.TimeFrom+":00.340Z'&createdAt[$lt]='"+this.props.DateTo+" "+this.props.TimeTo+":00.340Z'&suid="+this.props.SensId+"&$sort[createdAt]=-1";
     console.log(url);
     if(this.props.DateFrom == '' || this.props.DateTo  =='' || this.props.TimeTo =='' || this.props.TimeFrom =='' || this.props.SensId ==''){
         url = "http://localhost:3030/records?createdAt[$gt]='2019-09-11 15:22:29.340Z'&createdAt[$lt]='2019-09-11 17:22:29.340Z'&suid=7"
     }
     console.log("http://localhost:3030/records?createdAt[$gt]='2019-09-11 15:22:29.340Z'&createdAt[$lt]='2019-09-11 17:22:29.340Z'&suid=7");
-    //fetch("http://localhost:3030/records?createdAt[$gt]='2019-09-11 15:22:29.340Z'&createdAt[$lt]='2019-09-11 17:22:29.340Z'&suid=7",{
     fetch(url,{
        method: 'get',
        headers: {
@@ -95,11 +94,12 @@ class InformData extends React.Component {
       console.log("sensordata ",this.state.SensorData)
     })
     .catch(console.log)
-
   }
+
+
   render() {
     
-    var result = this.state.SensorData.map(values => ({ Data: values.dat, Hour:Moment(values.createdAt).format('hh:mm a') }));
+    var result = this.state.SensorData.map(values => ({ Data: values.dat, Hour:Moment(values.createdAt).format('dd/MM hh:mm a') }));
 
     return (
 

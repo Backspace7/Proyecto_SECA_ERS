@@ -16,6 +16,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
+  TimePicker
 } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
@@ -102,17 +103,19 @@ export default function SimpleSelect2() {
             'aria-label': 'change date',
           }}
         />
+        
+  
         <KeyboardTimePicker
-          margin="normal"
-          id="time-picker"
-          placeholder="Hora inicial"
-          format="hh:mm"
-          value={SelectTimeFrom}
-          onChange={handleDateChange3}
-          KeyboardButtonProps={{
-            'aria-label': 'change time',
-          }}
-        />
+        ampm={false}
+        placeholder="Hora inicial"
+        margin="normal"
+        id="time-picker"
+        variant="inline"
+        value={SelectTimeFrom}
+        onChange={handleDateChange3}
+         />
+
+
         <KeyboardDatePicker
           margin="normal"
           id="date-picker-dialog"
@@ -124,18 +127,17 @@ export default function SimpleSelect2() {
             'aria-label': 'change date',
           }}
         />
-        <KeyboardTimePicker
-          margin="normal"
-          id="time-picker"
-          placeholder="Hora Limite"
-          format="hh:mm"
-          value={SelectTimeTo}
-          onChange={handleDateChange4}
-          KeyboardButtonProps={{
-            'aria-label': 'change time',
-          }}
 
-        />
+          <KeyboardTimePicker
+        ampm={false}
+        placeholder="Hora Limite"
+        margin="normal"
+        id="time-picker"
+        variant="inline"
+        value={SelectTimeTo}
+        onChange={handleDateChange4}
+         />
+
       </Grid>
     </MuiPickersUtilsProvider>
       </div>

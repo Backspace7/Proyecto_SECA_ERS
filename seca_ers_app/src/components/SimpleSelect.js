@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
 export default function SimpleSelect() {
   const classes = useStyles();
   const [SensorId, setSensorId] = React.useState('');
+  const [SensorId2, setSensorId2] = React.useState('');
   const [SelectDateFrom, setSelectDateFrom] = React.useState('');
   const [SelectDateTo, setSelectDateTo] = React.useState('');
   const [SelectTimeFrom, setSelectTimeFrom] = React.useState('');
@@ -47,6 +48,9 @@ export default function SimpleSelect() {
   
   const handleChange = event => {
     setSensorId(event.target.value);
+  };
+  const handleChange5 = event => {
+    setSensorId2(event.target.value);
   };
   const handleDateChange1 = event => {
     if(event!=null){
@@ -134,7 +138,7 @@ export default function SimpleSelect() {
     </MuiPickersUtilsProvider>
       </div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-helper-label">Sensor </InputLabel>
+        <InputLabel id="demo-simple-select-helper-label">Sensor</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
@@ -149,7 +153,7 @@ export default function SimpleSelect() {
         </Select>
         <FormHelperText>Seleccione Sensor</FormHelperText>
       </FormControl>
-
+      
       
       <div>
 
@@ -158,6 +162,7 @@ export default function SimpleSelect() {
             {console.log("json",FullDateFrom,FullDateTo)}
             <TestComp DateFrom={FullDateFrom} DateTo={FullDateTo} SensId={SensorId} TimeFrom={FullTimeFrom} TimeTo={FullTimeTo}/>
           </Grid >
+          
       </Grid>
       </div>
       

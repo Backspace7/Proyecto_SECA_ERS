@@ -49,7 +49,11 @@ export default function InsetDividers() {
                     
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Temperatura" secondary={data[3].dat+"°C"} />
+                <ListItemText primary="Temperatura" secondary={data.map(function(obj){
+                    if(obj.suid==5){  return obj.dat +"°C";}
+                    })
+
+                } />
 
               <Divider variant="inset" component="tb"  orientation="horizontal"/>
               
@@ -58,7 +62,11 @@ export default function InsetDividers() {
                     <OpacityIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Humedad" secondary={data[4].dat+"%"} />
+                <ListItemText primary="Humedad" secondary={data.map(function(obj){
+                    if(obj.suid==8){  return obj.dat +"%";}
+                    })
+
+                } />
             
               <Divider variant="inset" component="tb" orientation="horizontal" />
            
@@ -67,7 +75,11 @@ export default function InsetDividers() {
                     <ExploreIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Presion Atm" secondary={data[5].dat+"mb"} />
+                <ListItemText primary="Presion Atm" secondary={data.map(function(obj){
+                    if(obj.suid==3){  return obj.dat +"mb";}
+                    })
+
+                } />
      
         </Grid>
             );
