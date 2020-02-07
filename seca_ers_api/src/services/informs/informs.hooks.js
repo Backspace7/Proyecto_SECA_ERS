@@ -1,7 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 
-const tmaxmin = require('../../hooks/tmaxmin');
-
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
@@ -17,7 +15,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [tmaxmin()],
+    create: [],
     update: [],
     patch: [],
     remove: []
