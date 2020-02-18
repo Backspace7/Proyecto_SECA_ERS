@@ -1,16 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
 import OpacityIcon from '@material-ui/icons/Opacity';
 import ExploreIcon from '@material-ui/icons/Explore';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import Divider from '@material-ui/core/Divider';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { Query,Loading} from 'react-admin';
@@ -50,7 +46,7 @@ export default function InsetDividers() {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary="Temperatura" secondary={data.map(function(obj){
-                    if(obj.suid==5){  return obj.dat +"°C";}
+                    if(obj.suid==11){  return obj.dat +"°C";}
                     })
 
                 } />

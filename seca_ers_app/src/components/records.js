@@ -6,7 +6,6 @@ import {List,
         TextField, 
         SimpleForm, 
         Edit, 
-        TextInput,
         Show,
         SimpleShowLayout,
         ReferenceField,
@@ -23,7 +22,7 @@ import {List,
 
 	var date_now = new Date(1568200000000);
 	date_now.setDate(date_now.getDate() +1);
-	var date_now = date_now.toISOString().substr(0,10);
+	
 
 
 
@@ -36,7 +35,7 @@ const RecordFilter = (props) => (
 		<ReferenceInput label="types" source="tuid" reference="sen-types" allowEmpty>
 		    <SelectInput optionText="type" />
 		</ReferenceInput>
-		<DateTimeInput  label="Date Time" source="createdAt"  /> 
+		<DateInput  label="Date Time" source="createdAt"  /> 
     	
     </Filter>
 );

@@ -1,13 +1,8 @@
 import React from 'react';
 import { Query,Loading} from 'react-admin';
 import Moment from 'moment';
-import TestComp from './TestComp';
-
 
 import {ResponsiveContainer, 
-        ComposedChart, 
-        Line, 
-        Area, 
         Bar, 
         XAxis, 
         YAxis, 
@@ -17,10 +12,6 @@ import {ResponsiveContainer,
         BarChart   } from 'recharts';
 
 import {FormControl,
-        InputLabel,
-        Input,
-        Button,
-        TextField,
         MenuItem,
         Select,
         FormHelperText } from "@material-ui/core";
@@ -79,14 +70,11 @@ handleChange2 = event => {
        sort: { field: 'createdAt', order: 'DESC' },
     }; 
     return (
-    
-      <div style={{ width: '90%', height: 200,background:'white',padding:'20px','borderRadius':'10px',margin: '20px' }}>
-        
-        <div>
-          
+      <div>
+          <div>
           <form  autoComplete="off" >
             <FormControl >
-              <FormHelperText>Select sensor description</FormHelperText>
+              <FormHelperText>Select sensor </FormHelperText>
 
               <Select
                 label="With placeholder"
@@ -103,8 +91,10 @@ handleChange2 = event => {
 
         
         </div>
-        <div>
-
+        
+      
+        <div style={{ width: '90%', height: 200,background:'white',padding:'20px','borderRadius':'10px',margin: '20px' }}>
+        
         <Storelist payload={payload}/>
         </div>
       </div>

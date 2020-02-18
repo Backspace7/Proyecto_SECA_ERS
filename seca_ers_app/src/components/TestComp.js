@@ -2,32 +2,14 @@ import 'date-fns';
 import Moment from 'moment';
 import React, { PureComponent } from 'react';
 import {ResponsiveContainer, 
-        ComposedChart, 
         Line, 
-        Area, 
-        Bar, 
         XAxis, 
         YAxis, 
         CartesianGrid, 
         Tooltip, 
         Legend,
-        BarChart,
          LineChart   } from 'recharts';
-import DateFnsUtils from '@date-io/date-fns';
-import Grid from '@material-ui/core/Grid';
-import {FormControl,
-        InputLabel,
-        Input,
-        Button,
-        TextField,
-        MenuItem,
-        Select,
-        FormHelperText } from "@material-ui/core";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+import { Button } from "@material-ui/core";
 class CustomizedLabel extends PureComponent {
   render() {
     const {
@@ -67,7 +49,7 @@ class TestComp extends React.Component {
   QueryData(){
     console.log("props",this.props.DateFrom,this.props.DateTo);
     console.log("props",this.props.TimeFrom,this.props.TimeTo);
-    var url="http://localhost:3030/records?$limit=70&createdAt[$gte]='"+this.props.DateFrom+" "+this.props.TimeFrom+":00.340Z'&createdAt[$lte]='"+this.props.DateTo+" "+this.props.TimeTo+":00.340Z'&suid="+this.props.SensId+"&$sort[createdAt]=-1";
+    var url="http://localhost:3030/records?$limit=100&createdAt[$gte]='"+this.props.DateFrom+" "+this.props.TimeFrom+":00.340Z'&createdAt[$lte]='"+this.props.DateTo+" "+this.props.TimeTo+":00.340Z'&suid="+this.props.SensId+"&$sort[createdAt]=-1";
     console.log(url);
     if(this.props.DateFrom == '' || this.props.DateTo  =='' || this.props.TimeTo =='' || this.props.TimeFrom =='' || this.props.SensId ==''){
         url = "http://localhost:3030/records?createdAt[$gt]='2019-09-11 15:22:29.340Z'&createdAt[$lt]='2019-09-11 17:22:29.340Z'&suid=7"
@@ -85,7 +67,9 @@ class TestComp extends React.Component {
       this.setState({ SensorData: data.data })
       console.log("sensordata ",this.state.SensorData)
     })
-    .catch(console.log)
+    .catch(function(err) {
+        console.info(err);
+    })
 
   }
 

@@ -1,27 +1,17 @@
 import React from 'react';
 import 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
-import TestComp from './TestComp';
-import Moment from 'moment';
-
-import Button from '@material-ui/core/Button';
+import InformData from './InformData';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
-  TimePicker
 } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(4),
+    margin: theme.spacing(0),
     minWidth: 120,
   },
   selectEmpty: {
@@ -37,20 +27,14 @@ export default function SimpleSelect2() {
   const [SensorId, setSensorId] = React.useState('');
   const [SelectDateFrom, setSelectDateFrom] = React.useState('');
   const [SelectDateTo, setSelectDateTo] = React.useState('');
-  const [SelectTimeFrom, setSelectTimeFrom] = React.useState('');
-  const [SelectTimeTo, setSelectTimeTo] = React.useState('');
   const [FullDateFrom, setFullDateFrom] = React.useState('');
   const [FullDateTo, setFullDateTo] = React.useState('');
-  const [FullTimeFrom, setFullTimeFrom] = React.useState('');
-  const [FullTimeTo, setFullTimeTo] = React.useState('');
   const [SelectAgroV, setSelectAgroV] = React.useState('');
   
   const inputLabel = React.useRef(null);
   var sensorsData = JSON.parse(JSON.stringify(localStorage.getItem('sensorUids')));
   
-  const handleChange = event => {
-    setSensorId(event.target.value);
-  };
+ 
   const handleChange5 = event => {
     setSelectAgroV(event.target.value);
   };
@@ -70,28 +54,15 @@ export default function SimpleSelect2() {
     }
     setSelectDateTo(event);
   };
-  const handleDateChange3 = event => {
-    if(event!=null){
-      var fulltime = event.getHours()+":"+event.getMinutes();
-      console.log("hour ", fulltime);
-      setFullTimeFrom(fulltime);
-    }
-    setSelectTimeFrom(event);
-  };
-  const handleDateChange4 = event => {
-    if(event!=null){
-      var fulltime = event.getHours()+":"+event.getMinutes();
-      setFullTimeTo(fulltime);
-    }
-    setSelectTimeTo(event);
-  };
+  
 
   return (
 
     <div>
-    <div className="container">
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around">
+
+
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify="space-around" >
          <KeyboardDatePicker
           margin="normal"
           id="date-picker-dialog"
@@ -103,19 +74,6 @@ export default function SimpleSelect2() {
             'aria-label': 'change date',
           }}
         />
-        
-  
-        <KeyboardTimePicker
-        ampm={false}
-        placeholder="Hora inicial"
-        margin="normal"
-        id="time-picker"
-        variant="inline"
-        value={SelectTimeFrom}
-        onChange={handleDateChange3}
-         />
-
-
         <KeyboardDatePicker
           margin="normal"
           id="date-picker-dialog"
@@ -127,65 +85,17 @@ export default function SimpleSelect2() {
             'aria-label': 'change date',
           }}
         />
-
-          <KeyboardTimePicker
-        ampm={false}
-        placeholder="Hora Limite"
-        margin="normal"
-        id="time-picker"
-        variant="inline"
-        value={SelectTimeTo}
-        onChange={handleDateChange4}
-         />
-
-      </Grid>
+    </Grid>
     </MuiPickersUtilsProvider>
-      </div>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-helper-label">Sensor </InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={SensorId}
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {JSON.parse(sensorsData).map(sensor => <MenuItem value={sensor.value}>{sensor.label}, {sensor.location}</MenuItem>)}
-         
-        </Select>
-        <FormHelperText>Seleccione Sensor</FormHelperText>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-helper-label">Variable</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={SelectAgroV}
-          onChange={handleChange5} >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={0}>Grados Dia Base 0</MenuItem>
-          <MenuItem value={5}>Grados Dia Base 5</MenuItem>
-          <MenuItem value={7}>Grados Dia Base 7</MenuItem>
-          <MenuItem value={10}>Grados Dia Base 10</MenuItem>
-          <MenuItem value={4}>Horas Frio</MenuItem>
-        </Select>
-        <FormHelperText>Variable Agroclimatica</FormHelperText>
-      </FormControl>
-      
-      <div>
-
+     
+    <div>
       <Grid container spacing={4}>
           <Grid  item sm={12}  spacing={4}>
             {console.log("json",FullDateFrom,FullDateTo)}
-            <TestComp DateFrom={FullDateFrom} DateTo={FullDateTo} SensId={SensorId} TimeFrom={FullTimeFrom} TimeTo={FullTimeTo}/>
+            <InformData DateFrom={FullDateFrom} DateTo={FullDateTo}  />
           </Grid >
       </Grid>
-      </div>
+    </div>
       
     </div>
     
