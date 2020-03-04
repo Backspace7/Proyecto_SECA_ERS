@@ -141,13 +141,27 @@ class InformData extends React.Component {
                     top: 10, right: 30, left: 0, bottom: 0,
                   }}
                 >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="Hour" />
-        <YAxis />
-        <Tooltip />
-        <Area type="monotone" dataKey="Tmax" stackId="1" stroke="#8884d8" fill="#8884d8" />
-        <Area type="monotone" dataKey="Tpro" stackId="1" stroke="#ffc658" fill="#ffc658" />
-        <Area type="monotone" dataKey="Tmin" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+        <defs>
+    <linearGradient id="colorTmax" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#ff8f65" stopOpacity={0.8}/>
+      <stop offset="95%" stopColor="#ff8f65" stopOpacity={0}/>
+    </linearGradient>
+    <linearGradient id="colorTpro" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#65ff8f" stopOpacity={0.8}/>
+      <stop offset="95%" stopColor="#65ff8f" stopOpacity={0}/>
+    </linearGradient>
+    <linearGradient id="colorTmin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#8f65ff" stopOpacity={0.8}/>
+      <stop offset="95%" stopColor="#8f65ff" stopOpacity={0}/>
+    </linearGradient>
+  </defs>
+  <XAxis dataKey="Hour" />
+  <YAxis />
+  <CartesianGrid strokeDasharray="3 3" />
+  <Tooltip />
+  <Area type="monotone" dataKey="Tmax" stroke="#ff8f65" fillOpacity={1} fill="url(#colorTmax)" />
+  <Area type="monotone" dataKey="Tpro" stroke="#65ff8f" fillOpacity={1} fill="url(#colorTpro)" />
+  <Area type="monotone" dataKey="Tmin" stroke="#8f65ff" fillOpacity={1} fill="url(#colorTmin)" />
         
       </AreaChart>
 

@@ -70,7 +70,7 @@ const Sensorlist  = () =>(
              // console.log("inter",sensorsuids);
               return (
               <Grid container spacing={4}>
-               <Grid  item sm={6}  spacing={2}>
+               <Grid  item sm={12}  spacing={2}>
                       <InsetDividers/>
                 </Grid >
                 <Grid  item sm={12}  spacing={4}>

@@ -9,13 +9,16 @@ import ExploreIcon from '@material-ui/icons/Explore';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import GrainIcon from '@material-ui/icons/Grain';
+
+
 import { Query,Loading} from 'react-admin';
 
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    maxWidth: 600,
+    maxWidth: 900,
     backgroundColor: theme.palette.background.paper,
   },
 }));
@@ -26,7 +29,7 @@ export default function InsetDividers() {
   const payload1 ={
 
        
-       pagination: { page: 1, perPage: 7 },
+       pagination: { page: 1, perPage:9 },
        sort: { field: 'createdAt', order: 'DESC' },
     }; 
   const Storelist = ({payload}) => (
@@ -46,7 +49,7 @@ export default function InsetDividers() {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary="Temperatura" secondary={data.map(function(obj){
-                    if(obj.suid==11){  return obj.dat +"°C";}
+                    if(obj.suid=='11'){  return obj.dat +"°C";}
                     })
 
                 } />
@@ -59,7 +62,7 @@ export default function InsetDividers() {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary="Humedad" secondary={data.map(function(obj){
-                    if(obj.suid==8){  return obj.dat +"%";}
+                    if(obj.suid=='8'){  return obj.dat +"%";}
                     })
 
                 } />
@@ -72,10 +75,23 @@ export default function InsetDividers() {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary="Presion Atm" secondary={data.map(function(obj){
-                    if(obj.suid==3){  return obj.dat +"mb";}
+                    if(obj.suid=='3'){  return obj.dat +"mb";}
                     })
 
                 } />
+                <Divider variant="inset" component="tb" orientation="horizontal" />
+           
+                <ListItemAvatar>
+                  <Avatar>
+                    <GrainIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary="Punto de Rocio" secondary={data.map(function(obj){
+                    if(obj.suid=='99'){  return obj.dat +"°C";}
+                    })
+
+                } />
+
      
         </Grid>
             );
