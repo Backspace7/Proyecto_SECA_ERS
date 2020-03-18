@@ -9,8 +9,6 @@ import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
 import TestComp from './TestComp';
-import Moment from 'moment';
-import Button from '@material-ui/core/Button';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -33,7 +31,6 @@ const useStyles = makeStyles(theme => ({
 export default function SimpleSelect() {
   const classes = useStyles();
   const [SensorId, setSensorId] = React.useState('');
-  const [SensorId2, setSensorId2] = React.useState('');
   const [SelectDateFrom, setSelectDateFrom] = React.useState('');
   const [SelectDateTo, setSelectDateTo] = React.useState('');
   const [SelectTimeFrom, setSelectTimeFrom] = React.useState('');
@@ -48,9 +45,6 @@ export default function SimpleSelect() {
   
   const handleChange = event => {
     setSensorId(event.target.value);
-  };
-  const handleChange5 = event => {
-    setSensorId2(event.target.value);
   };
   const handleDateChange1 = event => {
     if(event!=null){

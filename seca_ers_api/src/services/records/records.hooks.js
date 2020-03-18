@@ -2,6 +2,10 @@ const { authenticate } = require('@feathersjs/authentication').hooks;
 
 const tmaxmin = require('../../hooks/tmaxmin');
 
+const ptoRocio = require('../../hooks/pto_rocio');
+
+const radsolmax = require('../../hooks/radsolmax');
+
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
@@ -15,9 +19,9 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
-    get: [],
-    create: [tmaxmin()],
+    find: [ptoRocio()],
+    get: [ptoRocio()],
+    create: [tmaxmin(), radsolmax()],
     update: [],
     patch: [],
     remove: []

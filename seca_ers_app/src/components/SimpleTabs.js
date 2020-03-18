@@ -2,23 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Container from '@material-ui/core/Container';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Chart from './chart';
 import Chartbar from './chartbar';
 import Cuztomchart from './cuztomchart';
-import Chartscatter from './chartscatter';
-import TestComp from './TestComp';
 import SimpleSelect from './SimpleSelect';
 import SimpleSelect2 from './SimpleSelect2';
 import InsetDividers from './InsetDividers';
 import {Query,Loading} from 'react-admin';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import HistoryIcon from '@material-ui/icons/History';
+
+
+
 const payload2 ={
-   pagination: { page: 1, perPage: 10 },
+   pagination: { page: 1, perPage: 24 },
    sort: { field: 'id', order: 'ASC' },
 };
 function TabPanel(props) {
@@ -68,7 +70,7 @@ const Sensorlist  = () =>(
              // console.log("inter",sensorsuids);
               return (
               <Grid container spacing={4}>
-               <Grid  item sm={6}  spacing={2}>
+               <Grid  item sm={12}  spacing={2}>
                       <InsetDividers/>
                 </Grid >
                 <Grid  item sm={12}  spacing={4}>
@@ -96,9 +98,9 @@ export default function SimpleTabs() {
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Monitoreo 24H" {...a11yProps(0)} />
-          <Tab label="Historicos" {...a11yProps(1)} />
-          <Tab label="Informes Datos" {...a11yProps(2)} />
+          <Tab icon={<HistoryIcon/>}label="Monitoreo 24H" {...a11yProps(0)} />
+          <Tab icon={<ImportContactsIcon/>}label="Historicos" {...a11yProps(1)} />
+          <Tab icon={<TrendingUpIcon/>} label="Informes Datos" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -107,7 +109,7 @@ export default function SimpleTabs() {
       <TabPanel value={value} index={1}>
         <SimpleSelect/>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={2} icon={<TrendingUpIcon/>}>
         <SimpleSelect2/>
       </TabPanel>
     </div>

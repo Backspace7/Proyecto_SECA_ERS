@@ -1,15 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Query,Loading} from 'react-admin';
 import Moment from 'moment';
-import TestComp from './TestComp';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,ResponsiveContainer,
 } from 'recharts';
 import {FormControl,
-        InputLabel,
-        Input,
-        Button,
-        TextField,
         MenuItem,
         Select,
         FormHelperText } from "@material-ui/core";
@@ -90,14 +85,11 @@ export default class Cuztomchart extends PureComponent {
        sort: { field: 'createdAt', order: 'DESC' },
     }; 
     return (
-      <div style={{ width: '90%', height: 350 ,background:'white',padding:'20px','borderRadius':'10px',margin: '20px'} }>
-        
-        {console.log("this data",this.props.sensorsuids)}
-        <div>
+      <div>
           
           <form  autoComplete="off" >
             <FormControl >
-              <FormHelperText>Select sensor description</FormHelperText>
+              <FormHelperText>Select sensor</FormHelperText>
 
               <Select
                 label="With placeholder"
@@ -113,13 +105,16 @@ export default class Cuztomchart extends PureComponent {
           </form>
 
         
-        </div>
+        
+      <div style={{ width: '90%', height: 350 ,background:'white',padding:'20px','borderRadius':'10px',margin: '20px'} }>
+        
+        
         <div>
 
         <Storelist payload={payload}/>
         </div>
       </div>
-      
+      </div>
     );
   }
 }

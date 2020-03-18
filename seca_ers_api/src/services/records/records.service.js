@@ -11,7 +11,7 @@ module.exports = function (app) {
     Model,
     paginate: {
      default: 100,
-     max: 200
+     max: 300
     }
   };
 

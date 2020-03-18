@@ -3,10 +3,6 @@ import { Query,Loading} from 'react-admin';
 import Moment from 'moment';
 
 import {ResponsiveContainer, 
-        ComposedChart, 
-        Line, 
-        Area, 
-        Bar, 
         XAxis, 
         YAxis, 
         CartesianGrid, 
@@ -16,10 +12,6 @@ import {ResponsiveContainer,
         Scatter  } from 'recharts';
 
 import {FormControl,
-        InputLabel,
-        Input,
-        Button,
-        TextField,
         MenuItem,
         Select,
         FormHelperText } from "@material-ui/core";

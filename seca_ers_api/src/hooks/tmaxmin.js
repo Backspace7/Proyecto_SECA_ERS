@@ -13,8 +13,10 @@ module.exports = (options = {}) => {
   	var today = year+'-'+month+'-'+day;
   	
     if(context.result.tuid==9){
-    	const item =  await app.service('informs').find({Date:today});
-    	console.log("item",item);
+    	console.log("today", today);
+    	const item =  await app.service('informs').find({query: {
+    'Date': today  }});
+    	console.log("response of find",item);
     	if(item.total==0){
     		await app.service('informs').create({ 'Date': today,'Tmax':context.result.dat,'Tmin':context.result.dat,'Tpro':context.result.dat,'Rsol':0 });
     	}else{

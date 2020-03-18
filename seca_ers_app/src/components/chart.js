@@ -4,9 +4,7 @@ import Moment from 'moment';
 
 import {ResponsiveContainer, 
         ComposedChart, 
-        Line, 
         Area, 
-        Bar, 
         XAxis, 
         YAxis, 
         CartesianGrid, 
@@ -14,10 +12,6 @@ import {ResponsiveContainer,
         Legend } from 'recharts';
 
 import {FormControl,
-        InputLabel,
-        Input,
-        Button,
-        TextField,
         MenuItem,
         Select,
         FormHelperText } from "@material-ui/core";
