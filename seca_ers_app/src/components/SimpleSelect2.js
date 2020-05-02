@@ -11,7 +11,7 @@ import {
 
 const useStyles = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(0),
+    margin: theme.spacing(4),
     minWidth: 120,
   },
   selectEmpty: {
@@ -25,8 +25,8 @@ const useStyles = makeStyles(theme => ({
 export default function SimpleSelect2() {
   const classes = useStyles();
   const [SensorId, setSensorId] = React.useState('');
-  const [SelectDateFrom, setSelectDateFrom] = React.useState('');
-  const [SelectDateTo, setSelectDateTo] = React.useState('');
+  const [SelectDateFrom, setSelectDateFrom] = React.useState(new Date());
+  const [SelectDateTo, setSelectDateTo] = React.useState(new Date());
   const [FullDateFrom, setFullDateFrom] = React.useState('');
   const [FullDateTo, setFullDateTo] = React.useState('');
   const [SelectAgroV, setSelectAgroV] = React.useState('');
@@ -49,7 +49,8 @@ export default function SimpleSelect2() {
   const handleDateChange2 = event => {
     if(event!=null){
       const month = event.getMonth() +1;
-      var fulldate =  event.getFullYear().toString()+'-'+month+'-'+event.getDate().toString();
+      const day = event.getDate() +1;
+      var fulldate =  event.getFullYear().toString()+'-'+month+'-'+day.toString();
       setFullDateTo(fulldate);
     }
     setSelectDateTo(event);
@@ -62,11 +63,13 @@ export default function SimpleSelect2() {
 
 
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around" >
+      <Grid container justify="flex-start" spacing={4}  >
+      <Grid item xs={3} >
          <KeyboardDatePicker
           margin="normal"
           id="date-picker-dialog"
-          placeholder="Fecha inicial"
+          label="Fecha inicial"
+          
           format="MM/dd/yyyy"
           value={SelectDateFrom}
           onChange={handleDateChange1}
@@ -74,10 +77,12 @@ export default function SimpleSelect2() {
             'aria-label': 'change date',
           }}
         />
+        </Grid>
+      <Grid item xs={3}>
         <KeyboardDatePicker
           margin="normal"
-          id="date-picker-dialog"
-          placeholder="Fecha limite"
+          id="date-picker-dialog"placeholder="Fecha limite"
+          label="Fecha limite"
           format="MM/dd/yyyy"
           value={SelectDateTo}
           onChange={handleDateChange2}
@@ -85,6 +90,7 @@ export default function SimpleSelect2() {
             'aria-label': 'change date',
           }}
         />
+        </Grid>
     </Grid>
     </MuiPickersUtilsProvider>
      

@@ -10,6 +10,7 @@ import {ResponsiveContainer,
         Legend,
          LineChart   } from 'recharts';
 import { Button } from "@material-ui/core";
+import { Redirect } from 'react-router-dom';
 class CustomizedLabel extends PureComponent {
   render() {
     const {
@@ -49,10 +50,10 @@ class TestComp extends React.Component {
   QueryData(){
     console.log("props",this.props.DateFrom,this.props.DateTo);
     console.log("props",this.props.TimeFrom,this.props.TimeTo);
-    var url="http://localhost:3030/records?$limit=100&createdAt[$gte]='"+this.props.DateFrom+" "+this.props.TimeFrom+":00.340Z'&createdAt[$lte]='"+this.props.DateTo+" "+this.props.TimeTo+":00.340Z'&suid="+this.props.SensId+"&$sort[createdAt]=-1";
+    var url="http://localhost:3030/records?$limit=300&createdAt[$gte]='"+this.props.DateFrom+" "+this.props.TimeFrom+":00.000Z'&createdAt[$lte]='"+this.props.DateTo+" "+this.props.TimeTo+":00.000Z'&suid="+this.props.SensId+"&$sort[createdAt]=-1";
     console.log(url);
-    if(this.props.DateFrom == '' || this.props.DateTo  =='' || this.props.TimeTo =='' || this.props.TimeFrom =='' || this.props.SensId ==''){
-        url = "http://localhost:3030/records?createdAt[$gt]='2019-09-11 15:22:29.340Z'&createdAt[$lt]='2019-09-11 17:22:29.340Z'&suid=7"
+    if(this.props.DateFrom === '' || this.props.DateTo  ==='' || this.props.TimeTo ==='' || this.props.TimeFrom ==='' || this.props.SensId ===''){
+        url = "http://localhost:3030/records?createdAt[$gt]='2019-09-11 15:22:29.340Z'&createdAt[$lt]='2019-09-11 17:22:29.340Z'&suid=11"
     }
     fetch(url,{
        method: 'get',
@@ -68,7 +69,7 @@ class TestComp extends React.Component {
       console.log("sensordata ",this.state.SensorData)
     })
     .catch(function(err) {
-        console.info(err);
+         return <Redirect to="/dashboard" />;
     })
 
   }

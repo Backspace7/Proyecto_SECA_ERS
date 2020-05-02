@@ -3,7 +3,6 @@ import 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns';
@@ -11,17 +10,16 @@ import Grid from '@material-ui/core/Grid';
 import TestComp from './TestComp';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(4),
-    minWidth: 120,
+    margin: theme.spacing(2),
+    minWidth: 200,
   },
   selectEmpty: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -31,14 +29,13 @@ const useStyles = makeStyles(theme => ({
 export default function SimpleSelect() {
   const classes = useStyles();
   const [SensorId, setSensorId] = React.useState('');
-  const [SelectDateFrom, setSelectDateFrom] = React.useState('');
-  const [SelectDateTo, setSelectDateTo] = React.useState('');
-  const [SelectTimeFrom, setSelectTimeFrom] = React.useState('');
-  const [SelectTimeTo, setSelectTimeTo] = React.useState('');
-  const [FullDateFrom, setFullDateFrom] = React.useState('');
-  const [FullDateTo, setFullDateTo] = React.useState('');
-  const [FullTimeFrom, setFullTimeFrom] = React.useState('');
-  const [FullTimeTo, setFullTimeTo] = React.useState('');
+  const [SelectDateFrom, setSelectDateFrom] = React.useState("2020-3-30");
+  const [SelectDateTo, setSelectDateTo] = React.useState("2020-4-12");
+  
+  const [FullDateFrom, setFullDateFrom] = React.useState("2020-3-29");
+  const [FullDateTo, setFullDateTo] = React.useState("2020-4-11");
+  const [FullTimeFrom, setFullTimeFrom] = React.useState("00:00");
+  const [FullTimeTo, setFullTimeTo] = React.useState("23:00");
   
   const inputLabel = React.useRef(null);
   var sensorsData = JSON.parse(JSON.stringify(localStorage.getItem('sensorUids')));
@@ -62,32 +59,22 @@ export default function SimpleSelect() {
     }
     setSelectDateTo(event);
   };
-  const handleDateChange3 = event => {
-    if(event!=null){
-      var fulltime = event.getHours()+":"+event.getMinutes();
-      console.log("hour ", fulltime);
-      setFullTimeFrom(fulltime);
-    }
-    setSelectTimeFrom(event);
-  };
-  const handleDateChange4 = event => {
-    if(event!=null){
-      var fulltime = event.getHours()+":"+event.getMinutes();
-      setFullTimeTo(fulltime);
-    }
-    setSelectTimeTo(event);
-  };
+ 
 
   return (
 
     <div>
     <div className="container">
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around">
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify="flex-start">
+      <Grid item xs={3}>
          <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
           margin="normal"
+          label="Fecha inicial"
           id="date-picker-dialog"
-          placeholder="Fecha inicial"
+          
           format="MM/dd/yyyy"
           value={SelectDateFrom}
           onChange={handleDateChange1}
@@ -95,21 +82,15 @@ export default function SimpleSelect() {
             'aria-label': 'change date',
           }}
         />
-        <KeyboardTimePicker
-          margin="normal"
-          id="time-picker"
-          placeholder="Hora inicial"
-          format="hh:mm"
-          value={SelectTimeFrom}
-          onChange={handleDateChange3}
-          KeyboardButtonProps={{
-            'aria-label': 'change time',
-          }}
-        />
+        </Grid>
+        <Grid item xs={3}>
         <KeyboardDatePicker
           margin="normal"
+          disableToolbar
+          variant="inline"
+          label="Fecha limite"
           id="date-picker-dialog"
-          placeholder="Fecha limite"
+          
           format="MM/dd/yyyy"
           value={SelectDateTo}
           onChange={handleDateChange2}
@@ -117,22 +98,10 @@ export default function SimpleSelect() {
             'aria-label': 'change date',
           }}
         />
-        <KeyboardTimePicker
-          margin="normal"
-          id="time-picker"
-          placeholder="Hora Limite"
-          format="hh:mm"
-          value={SelectTimeTo}
-          onChange={handleDateChange4}
-          KeyboardButtonProps={{
-            'aria-label': 'change time',
-          }}
-        />
-      </Grid>
-    </MuiPickersUtilsProvider>
-      </div>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-helper-label">Sensor</InputLabel>
+        </Grid>
+          <Grid item xs={3}>
+        <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-helper-label">Seleccione Sensor</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
@@ -145,8 +114,15 @@ export default function SimpleSelect() {
           {JSON.parse(sensorsData).map(sensor => <MenuItem value={sensor.value}>{sensor.label}, {sensor.location}</MenuItem>)}
          
         </Select>
-        <FormHelperText>Seleccione Sensor</FormHelperText>
+        
       </FormControl>
+      </Grid>
+
+      </Grid>
+      </MuiPickersUtilsProvider>
+
+      </div>
+      
       
       
       <div>

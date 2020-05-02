@@ -51,7 +51,7 @@ const Storelist = ({payload}) => (
 class Chartbar extends React.Component {
   constructor(props){
    super(props);
-   this.state = { s_uid: '1', t_uid:'2', sensors:[], };
+   this.state = { s_uid: '8', t_uid:'12', sensors:[], };
   }
 handleChange1 = event => {
    this.setState({ s_uid: event.target.value });
@@ -72,8 +72,8 @@ handleChange2 = event => {
     return (
       <div>
           <div>
-          <form  autoComplete="off" >
-            <FormControl >
+          <form  autoComplete="on" >
+            <FormControl autoComplete="on">
               <FormHelperText>Select sensor </FormHelperText>
 
               <Select
@@ -89,7 +89,7 @@ handleChange2 = event => {
             </FormControl>
           </form>
 
-        
+       
         </div>
         
       

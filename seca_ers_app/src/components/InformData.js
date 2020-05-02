@@ -18,6 +18,7 @@ import {ResponsiveContainer,
 import Grid from '@material-ui/core/Grid';
 import { Button} from "@material-ui/core";
 
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -56,10 +57,10 @@ class InformData extends React.Component {
   QueryData(){
     console.log("props",this.props.DateFrom,this.props.DateTo);
     console.log("agroval", this.props.AgroVal)
-    var url="http://localhost:3030/informs?[$limit]=100&Date[$gte]='"+this.props.DateFrom+"'&createdAt[$lte]='"+this.props.DateTo+"'&$sort[createdAt]=-1";
+    var url="http://localhost:3030/informs?[$limit]=300&createdAt[$gte]='"+this.props.DateFrom+"'&createdAt[$lte]='"+this.props.DateTo+"'&$sort[createdAt]=-1";
     console.log(url);
     if(this.props.DateFrom == '' || this.props.DateTo  =='' || this.props.TimeTo =='' || this.props.TimeFrom =='' || this.props.SensId ==''){
-        url = "http://localhost:3030/informs?[$limit]=100&Date[$gte]='2020-2-7'&$sort[createdAt]=-1"
+        url = "http://localhost:3030/informs?[$limit]=300&createdAt[$gte]='2020-2-7'&$sort[createdAt]=-1"
     }
     console.log("http://localhost:3030/informs?[$limit]=100&Date[$gte]='2020-2-7'&$sort[createdAt]=-1");
     fetch(url,{
@@ -77,7 +78,7 @@ class InformData extends React.Component {
       this.Grados_dia();
     })
     .catch(function(err) {
-        console.info(err);
+       return <Redirect to="/dashboard" />;
     })
   }
 

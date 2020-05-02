@@ -36,7 +36,7 @@ export const SentypeList = props => (
             <TextField source="type" />
             <TextField source="description" />
             <DateField source="createdAt" />
-            <DateField source="updatedAt" />
+            
         </Datagrid>
     </List>
 );

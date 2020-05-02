@@ -80,7 +80,7 @@ export const RecordCreate = props => (
             <ReferenceInput source="tuid" reference="sen-types">
                 <SelectInput optionText="type" />
             </ReferenceInput>
-            <DateTimeInput source="createdAt" defaultValue={date_now} />
+            <ReferenceField source="createdAt" defaultValue={date_now} />
         </SimpleForm>
     </Create>
 );

@@ -29,7 +29,6 @@ const SensorTitle = ({ record }) => {
 };
 
 const redirect = (basePath, id, data) => '/sensors';
-
 export const SensorList = props => (
     <List filters={<SensorFilter />} {...props}>
         <Datagrid rowClick="edit">

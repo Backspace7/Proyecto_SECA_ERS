@@ -1,8 +1,11 @@
 import feathers from '@feathersjs/feathers';
 import auth from '@feathersjs/authentication-client';
 import rest from '@feathersjs/rest-client';
+import socketio from '@feathersjs/socketio-client';
+import io from 'socket.io-client';
 
-const apiUrl = 'http://192.168.0.10:3030';
+const apiUrl = 'http://localhost:3030';
+const socket = io('http://localhost:3030');
 
 const restClient = rest(apiUrl);
 const app = feathers();

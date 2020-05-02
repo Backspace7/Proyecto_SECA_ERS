@@ -67,7 +67,7 @@ class CustomizedAxisTick extends PureComponent {
 export default class Cuztomchart extends PureComponent {
   constructor(props){
    super(props);
-   this.state = { s_uid: '1', t_uid:'2', sensors:[], };
+   this.state = { s_uid: '11', t_uid:'12', sensors:[], };
     }
   handleChange1 = event => {
     console.log("event",event)
@@ -87,7 +87,7 @@ export default class Cuztomchart extends PureComponent {
     return (
       <div>
           
-          <form  autoComplete="off" >
+          <form  autoComplete="on" >
             <FormControl >
               <FormHelperText>Select sensor</FormHelperText>
 
