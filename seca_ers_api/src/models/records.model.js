@@ -18,6 +18,10 @@ module.exports = function (app) {
       type:DataTypes.INTEGER,
       allowNull:false
     },
+    zuid:{
+      type:DataTypes.STRING,
+      allowNull:true
+    }
   }, {
     hooks: {
       beforeCount(options) {

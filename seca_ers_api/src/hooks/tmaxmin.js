@@ -5,7 +5,7 @@
 module.exports = (options = {}) => {
   return async context => {
   	const { app, method, result, params } = context;
-
+    console.log("zona en insercion",result.zuid);
   	var date = new Date();
   	const month = date.getMonth()+1;
   	const day = date.getDate();
@@ -15,10 +15,10 @@ module.exports = (options = {}) => {
     if(context.result.tuid==9){
     	console.log("today", today);
     	const item =  await app.service('informs').find({query: {
-    'Date': today  }});
+    'Date': today,"zuid":context.result.zuid }});
     	console.log("response of find",item);
     	if(item.total==0){
-    		await app.service('informs').create({ 'Date': today,'Tmax':context.result.dat,'Tmin':context.result.dat,'Tpro':context.result.dat,'Rsol':0 });
+    		await app.service('informs').create({ 'Date': today,'Tmax':context.result.dat,'Tmin':context.result.dat,'Tpro':context.result.dat,'Rsol':0,'zuid':context.result.zuid });
     	}else{
     		if(item.data[0].Tmax<context.result.dat){
     	      

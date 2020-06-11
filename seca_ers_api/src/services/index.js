@@ -7,6 +7,7 @@ const crops = require('./crops/crops.service.js');
 const cropsTypes = require('./crops_types/crops_types.service.js');
 const cropsStages = require('./crops_stages/crops_stages.service.js');
 const actuators = require('./actuators/actuators.service.js');
+const zones = require('./zones/zones.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -18,4 +19,5 @@ module.exports = function (app) {
   app.configure(cropsTypes);
   app.configure(cropsStages);
   app.configure(actuators);
+  app.configure(zones);
 };

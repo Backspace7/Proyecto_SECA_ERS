@@ -5,27 +5,23 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const crops = sequelizeClient.define('crops', {
-    description:{
+  const zones = sequelizeClient.define('zones', {
+    zuid: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    cropId:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    phaseId:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    date:{
+    description: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    zuid:{
-      type: DataTypes.INTEGER,
+    location: {
+      type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    qr_code: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
   }, {
     hooks: {
       beforeCount(options) {
@@ -35,10 +31,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  crops.associate = function (models) {
+  zones.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
 
-  return crops;
+  return zones;
 };

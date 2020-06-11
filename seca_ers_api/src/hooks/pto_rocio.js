@@ -5,8 +5,7 @@
 module.exports = (options = {}) => {
   return async context => {
 
-  	console.log("context",context.result.limit);
-  	if(context.result.limit==9){
+  	if(context.result.limit==3){
   		
   		var temp = context.result.data.find(obj => obj.suid == 11);
   		var hum = context.result.data.find(obj => obj.suid == 8);

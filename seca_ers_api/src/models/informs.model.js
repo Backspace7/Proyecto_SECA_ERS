@@ -22,6 +22,10 @@ module.exports = function (app) {
       type: DataTypes.FLOAT,
       allowNull: false
     },
+    zuid: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     Date: {
       type: DataTypes.STRING,
       allowNull: false
