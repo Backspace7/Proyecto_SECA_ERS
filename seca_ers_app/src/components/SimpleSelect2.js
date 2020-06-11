@@ -1,9 +1,13 @@
 import React from 'react';
 import 'date-fns';
-import { makeStyles } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
 import InformData from './InformData';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -11,32 +15,23 @@ import {
 
 const useStyles = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(4),
-    minWidth: 120,
+    margin: theme.spacing(2),
+    minWidth: 150,
   },
   selectEmpty: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2),
   },
 }));
-
-
-
-
 export default function SimpleSelect2() {
   const classes = useStyles();
-  const [SensorId, setSensorId] = React.useState('');
-  const [SelectDateFrom, setSelectDateFrom] = React.useState(new Date());
-  const [SelectDateTo, setSelectDateTo] = React.useState(new Date());
-  const [FullDateFrom, setFullDateFrom] = React.useState('');
-  const [FullDateTo, setFullDateTo] = React.useState('');
-  const [SelectAgroV, setSelectAgroV] = React.useState('');
-  
-  const inputLabel = React.useRef(null);
-  var sensorsData = JSON.parse(JSON.stringify(localStorage.getItem('sensorUids')));
-  
- 
-  const handleChange5 = event => {
-    setSelectAgroV(event.target.value);
+  const [ZonaId, setZonaId] = React.useState(1);
+  const [SelectDateFrom, setSelectDateFrom] = React.useState("2020-3-29");
+  const [SelectDateTo, setSelectDateTo] = React.useState("2020-5-25");
+  const [FullDateFrom, setFullDateFrom] = React.useState("2020-3-29");
+  const [FullDateTo, setFullDateTo] = React.useState("2020-5-25");
+  var zone_list = JSON.parse(localStorage.getItem('zoneData'));
+  const handleChange = event => {
+    setZonaId(event.target.value);
   };
   const handleDateChange1 = event => {
     if(event!=null){
@@ -60,8 +55,6 @@ export default function SimpleSelect2() {
   return (
 
     <div>
-
-
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="flex-start" spacing={4}  >
       <Grid item xs={3} >
@@ -78,6 +71,7 @@ export default function SimpleSelect2() {
           }}
         />
         </Grid>
+        
       <Grid item xs={3}>
         <KeyboardDatePicker
           margin="normal"
@@ -91,14 +85,29 @@ export default function SimpleSelect2() {
           }}
         />
         </Grid>
+        <Grid item xs={3}>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-helper-label">Seleccione Zona</InputLabel>
+                <Select
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-simple-select-helper"
+                  value={ZonaId}
+                  onChange={handleChange}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {zone_list.map(zona => <MenuItem value={zona.id}>{zona.zuid},{zona.location},{zona.description}</MenuItem>)}
+                </Select>
+              </FormControl>
+          </Grid>
     </Grid>
     </MuiPickersUtilsProvider>
      
     <div>
       <Grid container spacing={4}>
           <Grid  item sm={12}  spacing={4}>
-            {console.log("json",FullDateFrom,FullDateTo)}
-            <InformData DateFrom={FullDateFrom} DateTo={FullDateTo}  />
+            <InformData zona={ZonaId} DateFrom={FullDateFrom} DateTo={FullDateTo}  />
           </Grid >
       </Grid>
     </div>

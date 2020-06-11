@@ -48,8 +48,8 @@ class TestComp extends React.Component {
     };
  
   QueryData(){
-    console.log("props",this.props.DateFrom,this.props.DateTo);
-    console.log("props",this.props.TimeFrom,this.props.TimeTo);
+    //console.log("props",this.props.DateFrom,this.props.DateTo);
+    //console.log("props",this.props.TimeFrom,this.props.TimeTo);
     var url="http://localhost:3030/records?$limit=300&createdAt[$gte]='"+this.props.DateFrom+" "+this.props.TimeFrom+":00.000Z'&createdAt[$lte]='"+this.props.DateTo+" "+this.props.TimeTo+":00.000Z'&suid="+this.props.SensId+"&$sort[createdAt]=-1";
     console.log(url);
     if(this.props.DateFrom === '' || this.props.DateTo  ==='' || this.props.TimeTo ==='' || this.props.TimeFrom ==='' || this.props.SensId ===''){
@@ -66,7 +66,7 @@ class TestComp extends React.Component {
     .then(res => res.json())
     .then((data) => {
       this.setState({ SensorData: data.data })
-      console.log("sensordata ",this.state.SensorData)
+      //console.log("sensordata ",this.state.SensorData)
     })
     .catch(function(err) {
          return <Redirect to="/dashboard" />;

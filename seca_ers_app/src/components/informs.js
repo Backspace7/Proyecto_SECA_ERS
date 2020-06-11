@@ -9,7 +9,11 @@ import {List,
         NumberField,
         DateField,
         NumberInput,
-        DateInput
+        DateInput,
+        ReferenceInput,
+        SelectInput,
+        ReferenceField,
+        TextField
         } from 'react-admin';
 
 const redirect = (basePath, id, data) => '/informs';
@@ -26,6 +30,9 @@ const InformFilter = (props) => (
         <NumberInput lavel="Tmin" source="Tmin"/>
         <NumberInput lavel="Tpro" source="Tpro"/>
         <NumberInput lavel="Rsol" source="Rsol"/>
+        <ReferenceInput label="zona" source="zuid" reference="zones" allowEmpty>
+          <SelectInput optionText="zuid" />
+        </ReferenceInput>
     </Filter>
 );
 export const InformList = props => (
@@ -36,6 +43,9 @@ export const InformList = props => (
             <NumberField source="Tpro" />
             <NumberField source="Rsol" />
             <DateField source="createdAt" />
+            <ReferenceField source="zuid" reference="zones">
+                <TextField source="zuid" />
+            </ReferenceField>
         </Datagrid>
     </List>
 );
@@ -49,6 +59,9 @@ export const InformEdit = props => (
             <NumberInput source="Tmin" />
             <NumberInput source="Tpro" />
             <NumberInput source="Rsol" />
+            <ReferenceInput source="zuid" reference="zones">
+                <SelectInput optionText="zuid" />
+            </ReferenceInput>
         </SimpleForm>
     </Edit>
 );
@@ -61,6 +74,9 @@ export const InformShow = props => (
             <NumberField source="Tpro" />
             <NumberField source="Rsol" />
             <DateField source="Date" />
+            <ReferenceField source="zuid" reference="zones">
+                <TextField source="zuid" />
+            </ReferenceField>
         </SimpleForm>
     </Show>
 );
@@ -73,6 +89,9 @@ export const InformCreate = props => (
             <NumberInput source="Tmin" />
             <NumberInput source="Tpro" />
             <NumberInput source="Rsol" />
+            <ReferenceInput source="zuid" reference="zones">
+                <SelectInput optionText="zuid" />
+            </ReferenceInput>
             <DateInput source="Date" defaultValue={today}  options={{ day: 'numeric' , year: 'numeric', month: 'numeric' }}/>
         </SimpleForm>
     </Create>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -10,37 +9,119 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import GrainIcon from '@material-ui/icons/Grain';
+import { withStyles } from '@material-ui/core/styles';
 
 
-import { Query,Loading} from 'react-admin';
+const useStyles = theme => ({
+    root: {
+      width: '100%',
+      maxWidth: 900,
+      backgroundColor: theme.palette.background.paper,
+    },
+  });
 
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    maxWidth: 900,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
 
+class InsetDividers extends React.Component  {
+  constructor(props){
+    super(props);
+    this.state={
+      fetched:false,
+      zonaprevia:0,
+      data:[],
+      Tem:null,
+      Hum:null,
+      Pre:null,
+      Pto:null,
+    }
 
-export default function InsetDividers() {
-  const classes = useStyles();
-  const payload1 ={
+  }
+  
+  async procesData(zona){
+      var data = await this.QueryData2(zona);
+      this.setState({data:data});
+      //console.log("data",data);
+      //console.log("data0",data[0].dat);
+      //console.log("data1",data[1].dat);
+      //console.log("data2",data[2].dat);
+      //console.log("data3",data[3].dat);
+      if(data[0]!=null){
+        data.map(obj =>{
+            if(obj.suid=='11'){
+                this.setState({Tem:obj.dat});
+            }
+            if(obj.suid=='99'){
+               this.setState({Pto:obj.dat});
+            }
+            if(obj.suid=='8'){
+               this.setState({Hum:obj.dat});
+            }
+            if(obj.suid=='3'){
+              this.setState({Pre:obj.dat});
+            }
+          }
+         );
+      }else{
+        this.setState({Tem:NaN});
+        this.setState({Pto:NaN});
+        this.setState({Hum:NaN});
+        this.setState({Pre:NaN});
+      }
+      
+      
+  }
+  async QueryData2(zona){
+         try {
+            var url="http://192.168.0.4:3030/records?&zuid="+this.props.zona.zid+"&suid=3&suid=8&suid=11&$limit=3&$sort[createdAt]=-1";
+            const reposResponse = await fetch(url,{method:'get',headers:{'Content-Type':'application/json',Accept:'application/json','Authorization':`Bearer ${localStorage.getItem('feathers-jwt')}`}});
+            const userRepos = await reposResponse.json();
+            var data=userRepos.data;
+            this.setState({fetched:true});
+            return data;
+          }catch (error) {
+            console.log(error);
+          }
+    }
 
-       
-       pagination: { page: 1, perPage:9 },
-       sort: { field: 'createdAt', order: 'DESC' },
-    }; 
-  const Storelist = ({payload}) => (
-  <div>
-    <Query type="GET_LIST" resource="records" payload={payload}>
-        {({ data, total, loading, error }) => {
-            if (loading) { return <Loading />; }
-            if (error) { return <p>ERROR</p>; }
-            console.log("get_one", data);
-            return (
-              <Grid container className={classes.root} >
+    QueryData(){
+    
+    var url="http://192.168.0.4:3030/records?&zuid="+this.props.zona.zid+"&suid=8&suid=3&suid=11&$limit=3&$sort[createdAt]=-1";
+    fetch(url,{
+       method: 'get',
+       headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('feathers-jwt')}`
+        }
+    })
+    .then(res => res.json())
+    .then((data) => {
+      var result = data.data;
+      
+      this.setState({ data: result })
+      this.setState({ fetched: true })
+      //console.log("sensordata ",this.state.data)
+    })
+    .catch(function(err) {
+         console.log(err);
+    })
+
+  }
+   render(){
+    const { classes } = this.props;
+    const {zona} = this.props;
+    if( this.state.zonaprevia!= zona.zid){
+        this.setState({zonaprevia:zona.zid});
+        this.setState({fetched:false});
+    }
+    if(this.state.fetched===false && zona.zid !=0){
+      this.procesData(zona);
+
+    }
+    
+    return (
+      <div>
+        <Grid container className={classes.root} >
          
                 <ListItemAvatar>
                   <Avatar>
@@ -48,11 +129,7 @@ export default function InsetDividers() {
                     
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Temperatura" secondary={data.map(function(obj){
-                    if(obj.suid=='11'){  return obj.dat +"°C";}
-                    })
-
-                } />
+                <ListItemText primary="Temperatura" secondary={!!this.state.Tem? this.state.Tem +"°C":'no data'} />
 
               <Divider variant="inset" component="tb"  orientation="horizontal"/>
               
@@ -61,11 +138,7 @@ export default function InsetDividers() {
                     <OpacityIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Humedad" secondary={data.map(function(obj){
-                    if(obj.suid=='8'){  return obj.dat +"%";}
-                    })
-
-                } />
+                <ListItemText primary="Humedad" secondary={!!this.state.Hum? this.state.Hum +"%":'no data'} />
             
               <Divider variant="inset" component="tb" orientation="horizontal" />
            
@@ -74,11 +147,7 @@ export default function InsetDividers() {
                     <ExploreIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Presion Atm" secondary={data.map(function(obj){
-                    if(obj.suid=='3'){  return obj.dat +"mb";}
-                    })
-
-                } />
+                <ListItemText primary="Presion Atm" secondary={!!this.state.Pre? this.state.Pre +"mbr":'no data'}/>
                 <Divider variant="inset" component="tb" orientation="horizontal" />
            
                 <ListItemAvatar>
@@ -86,24 +155,11 @@ export default function InsetDividers() {
                     <GrainIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Punto de Rocio" secondary={data.map(function(obj){
-                    if(obj.suid=='99'){  return obj.dat +"°C";}
-                    })
-
-                } />
-
-     
-        </Grid>
-            );
-        }}
-    </Query>
-    </div>
-); 
-   
-  return (
-    <div>
-    <Storelist payload={payload1}/>
-    
-    </div>
-  );
+                <ListItemText primary="Punto de Rocio" secondary={!!this.state.Pto? this.state.Pto +"°C":'no data'}/>
+              </Grid>
+      
+      </div>
+    );
+  }
 }
+export default withStyles(useStyles)(InsetDividers)

@@ -23,14 +23,17 @@ const CropsTitle = ({ crop }) => {
 const CropsFilter = (props) => (
     <Filter {...props}>
      
-      <TextInput label="location" source="location" defaultValue=" location " />
+      
       <TextInput label="description" source="description" defaultValue=" description " />
       <TextInput label="date" source="date" defaultValue=" date " />
       <ReferenceInput label="phase" source="phaseId" reference="crops-stages" allowEmpty>
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput label="crop" source="cropId" reference="crops-types" allowEmpty>
+      <ReferenceInput label="cultivo" source="cropId" reference="crops-types" allowEmpty>
           <SelectInput optionText="name" />
+      </ReferenceInput>
+      <ReferenceInput label="zona" source="zuid" reference="zones" allowEmpty>
+          <SelectInput optionText="zuid" />
       </ReferenceInput>
     </Filter>
 );
@@ -44,8 +47,10 @@ export const CropsCreate = props => (
             <ReferenceInput source="phaseId" reference="crops-stages">
                 <SelectInput optionText="name" />
             </ReferenceInput>
+            <ReferenceInput source="zuid" reference="zones">
+                <SelectInput optionText="zuid" />
+            </ReferenceInput>
             
-            <TextInput source="location" />
             <TextInput source="description" />
             <DateInput source="date" defaultValue={new Date()} />
         </SimpleForm>
@@ -55,15 +60,18 @@ export const CropsCreate = props => (
 export const CropsList = props => (
     <List filters={<CropsFilter />} {...props}>
         <Datagrid rowClick="edit">
-            <TextField source="location" />
             
-            <ReferenceField source="cropId" reference="crops-types">
+            
+            <ReferenceField label="Cultivo" source="cropId" reference="crops-types">
                 <TextField source="name" />
             </ReferenceField>    
-            <ReferenceField source="phaseId" reference="crops-stages">
+            <ReferenceField label="Fase Fenologica" source="phaseId" reference="crops-stages">
                 <TextField source="name" />
             </ReferenceField>
-            <TextField source="description" />  
+            <ReferenceField label="Zona" source="zuid" reference="zones">
+                <TextField source="zuid" />
+            </ReferenceField>
+            <TextField label="Descripcion" source="description" />  
             
             <DateField source="date" />
 
@@ -74,13 +82,16 @@ export const CropsList = props => (
 export const CropsShow = props => (
     <Show {...props}>
         <SimpleShowLayout>
-            TextField source="location" />
+            
             <TextField source="description" />
             <ReferenceField source="cropId" reference="crops-types">
                 <TextField source="name" />
             </ReferenceField>      
             <ReferenceField source="phaseId" reference="crops-stages">
                 <TextField source="name" />
+            </ReferenceField>
+            <ReferenceField source="zuid" reference="zones">
+                <TextField source="zuid" />
             </ReferenceField>
             <DateField source="date" />
         </SimpleShowLayout>
@@ -96,7 +107,10 @@ export const CropsEdit = props => (
             <ReferenceInput source="phaseId" reference="crops-stages">
                 <SelectInput optionText="name" />
             </ReferenceInput>
-            <TextInput source="location" />
+            <ReferenceInput source="zuid" reference="zones">
+                <SelectInput optionText="zuid" />
+            </ReferenceInput>
+            
             <TextInput source="description" />
             <DateInput source="date" />
         </SimpleForm>

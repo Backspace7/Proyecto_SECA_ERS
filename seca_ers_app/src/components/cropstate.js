@@ -118,8 +118,8 @@ export default function Cropstate() {
    		 setCrop(event.target.value);
   	};
 	const handleChange_gethistory = event => {
-   		var url="http://localhost:3030/crops?location="+zone+"&cropId="+crop+"&$sort[date]=-1";
-	    console.log(url);
+   		var url="http://192.168.0.4:3030/crops?location="+zone+"&cropId="+crop+"&$sort[date]=-1";
+	    //console.log(url);
 	    fetch(url,{
 	       method: 'get',
 	       headers: {
@@ -138,13 +138,13 @@ export default function Cropstate() {
   	};
   	var BodyModal = <div style={modalStyle} className={classes.paper2}><CropsCreate basePath={"/"} location={"/crops"} resource={"crops"}/ ></div>;
 
-    console.log("cropdData",cropdata);
-    console.log("zoneCrops",zoneCrops);
-    console.log("zone",zone);
-    console.log("croptypedata",croptypedata);
-    console.log("zoneCrops_names",zoneCrops_names);
-    console.log("CropTrace",CropTrace);
-    console.log("cropphases",cropphases);
+   // console.log("cropdData",cropdata);
+   // console.log("zoneCrops",zoneCrops);
+   // console.log("zone",zone);
+   // console.log("croptypedata",croptypedata);
+   // console.log("zoneCrops_names",zoneCrops_names);
+   // console.log("CropTrace",CropTrace);
+   // console.log("cropphases",cropphases);
     if (!CropTrace) {
      var CropTraceRender = "Please Selecet a Zone and Crop";
     } else {

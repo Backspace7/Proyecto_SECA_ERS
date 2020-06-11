@@ -3,22 +3,20 @@ import feathersClient from './feathersClient';
 import { authClient, restClient } from 'aor-feathers-client'
 import { Admin, Resource,ListGuesser, EditGuesser, ShowGuesser,Login} from 'react-admin';
 import { createBrowserHistory as createHistory } from 'history';
-
+import '../node_modules/react-vis/dist/style.css';
 
 import SettingsRemoteIcon from '@material-ui/icons/SettingsRemote';
 import UserIcon from '@material-ui/icons/Group';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import StorageIcon from '@material-ui/icons/Storage';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-
 import SettingsInputAntennaIcon from '@material-ui/icons/SettingsInputAntenna';
 import TuneIcon from '@material-ui/icons/Tune';
-
 import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import FilterVintageIcon from '@material-ui/icons/FilterVintage';
 import MemoryIcon from '@material-ui/icons/Memory';
-
+import DeviceHubIcon from '@material-ui/icons/DeviceHub';
 
 import {SensorList,SensorCreate,SensorEdit,SensorShow} from './components/sensors'
 import {SentypeList,SentypeCreate,SentypeEdit,SentypeShow} from './components/sentypes'
@@ -51,7 +49,6 @@ const restClientOptions = {
 
 const MyLoginPage = () => (
     <Login
-        // A random image that changes everyday
         backgroundImage="https://source.unsplash.com/1600x900/?traffic,road"
     />
 );
@@ -60,12 +57,13 @@ const App = () => (
         <Resource name="users" list={UserList} create={UserCreate} icon={UserIcon} show={UserShow}/>
         <Resource name="sen-types" list={SentypeList} edit={SentypeEdit} create={SentypeCreate} show={SentypeShow} icon={MemoryIcon}/>
         <Resource name="sensors" list={SensorList} edit={SensorEdit} create={SensorCreate} show={SensorShow} icon={SettingsRemoteIcon}/>
-        <Resource name="records" list={RecordList} edit={RecordEdit} create={RecordCreate} show={ShowGuesser} icon={StorageIcon}/>
+        <Resource name="records" list={RecordList} edit={EditGuesser} create={RecordCreate} show={ShowGuesser} icon={StorageIcon}/>
         <Resource name="informs" list={InformList} show={InformShow} edit={InformEdit} create={InformCreate} icon={TrendingUpIcon} />
         <Resource name="crops-types" list={CropstypesList} show={CropstypesShow} edit={CropstypesEdit} create={CropstypesCreate} icon={FilterVintageIcon}/>
         <Resource name="crops-stages" list={CropsstagesList} show={CropsstagesShow} edit={CropsstagesEdit} create={CropsstagesCreate} icon={FormatListNumberedIcon}/>
         <Resource name="crops" list={CropsList} show={CropsShow} edit={CropsEdit } create={CropsCreate} icon={LocalFloristIcon} />
         <Resource name="actuators" list={ActuatorList} show={ActuatorShow} create={ActuatorCreate} edit={ActuatorEdit } icon={TuneIcon} />
+        <Resource name="zones" list={ListGuesser} show={ShowGuesser} edit={EditGuesser } icon={DeviceHubIcon} />
   </Admin>
 
 );

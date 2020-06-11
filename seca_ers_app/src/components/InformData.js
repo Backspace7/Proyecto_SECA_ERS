@@ -7,7 +7,6 @@ import Avatar from '@material-ui/core/Avatar';
 import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 
 
-
 import {ResponsiveContainer, 
         Area, 
         XAxis, 
@@ -32,7 +31,6 @@ class InformData extends React.Component {
      handleChange1 = event => {
        this.QueryData();
        
-       
     };
 
   Grados_dia(){
@@ -40,63 +38,64 @@ class InformData extends React.Component {
     const sum = this.state.SensorData.map(element => element.Tpro).reduce((a, b) => a + (b-0), 0);
     var sum_ = sum.toFixed(2);
     this.setState({ Grd0: sum_ })
-    console.log("suma",sum);
+    //console.log("suma",sum);
     const sum2 = this.state.SensorData.map(element => element.Tpro).reduce((a, b) => a + (b-5), 0);
     var sum2_ = sum2.toFixed(2);
     this.setState({ Grd5: sum2_})
-    console.log("suma2",sum2);
+    //console.log("suma2",sum2);
     const sum3 = this.state.SensorData.map(element => element.Tpro).reduce((a, b) => a + (b-7), 0);
     var sum3_ = sum3.toFixed(2);
     this.setState({ Grd7: sum3_ })
-    console.log("suma3",sum3);
+    //console.log("suma3",sum3);
     const sum4 = this.state.SensorData.map(element => element.Tpro).reduce((a, b) => a + (b-10), 0);
     var sum4_ = sum4.toFixed(2);
     this.setState({ Grd10: sum4_ })
-    console.log("suma4",sum4);
+    //console.log("suma4",sum4);
   }
-  QueryData(){
-    console.log("props",this.props.DateFrom,this.props.DateTo);
-    console.log("agroval", this.props.AgroVal)
-    var url="http://localhost:3030/informs?[$limit]=300&createdAt[$gte]='"+this.props.DateFrom+"'&createdAt[$lte]='"+this.props.DateTo+"'&$sort[createdAt]=-1";
-    console.log(url);
-    if(this.props.DateFrom == '' || this.props.DateTo  =='' || this.props.TimeTo =='' || this.props.TimeFrom =='' || this.props.SensId ==''){
-        url = "http://localhost:3030/informs?[$limit]=300&createdAt[$gte]='2020-2-7'&$sort[createdAt]=-1"
-    }
-    console.log("http://localhost:3030/informs?[$limit]=100&Date[$gte]='2020-2-7'&$sort[createdAt]=-1");
-    fetch(url,{
-       method: 'get',
-       headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('feathers-jwt')}`
+  
+  async QueryList(zona){
+      var data0 =await this.QueryData2(zona);
+      this.setState({SensorData:data0});
+      //console.log("data0",data0);
+      await this.Grados_dia();
+ }
+  async QueryData2(zona,suid,DateFrom,DateTo,TimeFrom,TimeTo){
+       try {
+         //console.log(DateFrom,DateTo);
+         //cambiar el filtro de la url agregando las zonas, ya que hasta ahora estan todas catalogadas con null seria agregar &suid="+this.props.zona+"
+          var url="http://192.168.0.4:3030/informs?$limit=600&zuid="+zona+"&createdAt[$gte]='"+this.props.DateFrom+" 00:00:00.000Z'&createdAt[$lte]='"+this.props.DateTo+" 23:00:00.000Z'&$sort[createdAt]=1";
+          //console.log("url",url);
+          const reposResponse = await fetch(url,{method:'get',headers:{'Content-Type':'application/json',Accept:'application/json','Authorization':`Bearer ${localStorage.getItem('feathers-jwt')}`}});
+          const userRepos = await reposResponse.json();
+          //console.log("asd",userRepos.data);
+          var newdata = userRepos.data;
+          this.setState({fetching:true});
+          return newdata;
+        }catch (error) {
+          console.log(error);
         }
-    })
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({ SensorData: data.data })
-      console.log("sensordata inform ",this.state.SensorData)
-      this.Grados_dia();
-    })
-    .catch(function(err) {
-       return <Redirect to="/dashboard" />;
-    })
   }
-
 
   render() {
-    
+    const {zona,DateTo,DateFrom,TimeFrom,TimeTo} = this.props;
+    if( this.state.zonaprevia!= zona || this.state.fechaprev1!=DateFrom || this.state.fechaprev2!=DateTo ){
+      this.setState({DATA:[]});
+      this.setState({zonaprevia:zona});
+      this.setState({fechaprev1:DateFrom});
+      this.setState({fechaprev2:DateTo});
+      this.setState({fetching:false});
+    }
+    if(this.state.fetching==false && zona!=0){
+
+      this.QueryList(zona,DateFrom,DateTo,TimeFrom,TimeTo);
+    }
     var result = this.state.SensorData.map(values => ({ "Tmax": values.Tmax,"Tmin": values.Tmin,"Tpro": values.Tpro, "Hour":Moment(values.createdAt).format('DD/MM ') }));
     return (
 
        <div className="container">
 
        
-       <Grid container spacing={12}>
-          <Grid  item sm={2}  spacing={2}>
-             <Button variant="contained" color="primary" onClick={this.handleChange1} >
-              Get Data
-             </Button>
-          </Grid >
+       <Grid container spacing={10}>
            <Grid  item sm={2}  spacing={2}>
              <ListItemAvatar>
                   <Avatar>

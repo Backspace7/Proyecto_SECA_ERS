@@ -61,7 +61,7 @@ export const ActuatorCreate = props => (
             <BooleanInput source="activated" />
             <NumberInput source="threshold" />
             <BooleanInput source="automatic" />
-            <NumberInput source="minutes" />
+            <NumberInput  source="minutes" />
         </SimpleForm>
     </Create>
 );

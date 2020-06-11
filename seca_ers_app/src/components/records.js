@@ -51,6 +51,9 @@ export const RecordList = props => (
             <ReferenceField source="tuid" reference="sen-types">
                 <TextField source="type" />
             </ReferenceField>
+            <ReferenceField source="zuid" reference="zones">
+                <TextField source="zuid" />
+            </ReferenceField>
         </Datagrid>
     </List>
 );
@@ -65,6 +68,9 @@ export const RecordEdit = props => (
             <ReferenceInput source="tuid" reference="sen-types">
                 <SelectInput optionText="type" />
             </ReferenceInput>
+            <ReferenceInput source="zuid" reference="zones">
+                <SelectInput optionText="zuid" />
+            </ReferenceInput>
         </SimpleForm>
     </Edit>
 );
@@ -78,9 +84,11 @@ export const RecordCreate = props => (
                 <SelectInput optionText="suid" />
             </ReferenceInput>
             <ReferenceInput source="tuid" reference="sen-types">
-                <SelectInput optionText="type" />
+                <SelectInput optionText="description" />
             </ReferenceInput>
-            <ReferenceField source="createdAt" defaultValue={date_now} />
+            <ReferenceInput source="zuid" reference="zones">
+                <SelectInput optionText="zuid" />
+            </ReferenceInput>
         </SimpleForm>
     </Create>
 );

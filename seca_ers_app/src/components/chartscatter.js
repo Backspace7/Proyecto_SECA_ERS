@@ -23,7 +23,7 @@ const Storelist = ({payload}) => (
         {({ data, total, loading, error }) => {
             if (loading) { return <Loading />; }
             if (error) { return <p>ERROR</p>; }
-            console.log("data ->",data)
+            //console.log("data ->",data)
             var result = data.map(values => ({ Data: values.dat, Hour:Moment(values.createdAt).format('D/M/Y hh:mm a') }));
             
             return (
@@ -54,7 +54,7 @@ class Chartscatter extends React.Component {
    this.state = { s_uid: '1', t_uid:'2', sensors:[], };
   }
 handleChange1 = event => {
-  console.log("event",event)
+  //console.log("event",event)
    this.setState({ s_uid: event.target.value });
 };
 handleChange2 = event => {
@@ -74,7 +74,7 @@ handleChange2 = event => {
     
       <div style={{ width: '90%', height: 400 ,background:'white',padding:'40px','borderRadius':'10px',margin: '20px'} }>
         
-        {console.log("this data",this.props.sensorsuids)}
+        //{console.log("this data",this.props.sensorsuids)}
         <div>
           
           <form  autoComplete="off" >

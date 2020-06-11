@@ -7,7 +7,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
-import TestComp from './TestComp';
+import Vischart_hist from './vischart_hist';
+import Vischart from './vischart';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -28,10 +29,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function SimpleSelect() {
   const classes = useStyles();
-  const [SensorId, setSensorId] = React.useState('');
+  const [ZonaId, setZonaId] = React.useState(1);
   const [SelectDateFrom, setSelectDateFrom] = React.useState("2020-3-30");
   const [SelectDateTo, setSelectDateTo] = React.useState("2020-4-12");
-  
+
   const [FullDateFrom, setFullDateFrom] = React.useState("2020-3-29");
   const [FullDateTo, setFullDateTo] = React.useState("2020-4-11");
   const [FullTimeFrom, setFullTimeFrom] = React.useState("00:00");
@@ -39,9 +40,9 @@ export default function SimpleSelect() {
   
   const inputLabel = React.useRef(null);
   var sensorsData = JSON.parse(JSON.stringify(localStorage.getItem('sensorUids')));
-  
+  var zone_list = JSON.parse(localStorage.getItem('zoneData'));
   const handleChange = event => {
-    setSensorId(event.target.value);
+    setZonaId(event.target.value);
   };
   const handleDateChange1 = event => {
     if(event!=null){
@@ -100,43 +101,31 @@ export default function SimpleSelect() {
         />
         </Grid>
           <Grid item xs={3}>
-        <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-helper-label">Seleccione Sensor</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={SensorId}
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {JSON.parse(sensorsData).map(sensor => <MenuItem value={sensor.value}>{sensor.label}, {sensor.location}</MenuItem>)}
-         
-        </Select>
-        
-      </FormControl>
-      </Grid>
-
-      </Grid>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-helper-label">Seleccione Zona</InputLabel>
+                <Select
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-simple-select-helper"
+                  value={ZonaId}
+                  onChange={handleChange}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {zone_list.map(zona => <MenuItem value={zona.id}>{zona.zuid},{zona.location},{zona.description}</MenuItem>)}
+                </Select>
+              </FormControl>
+          </Grid>
+       </Grid>
       </MuiPickersUtilsProvider>
-
       </div>
-      
-      
-      
       <div>
-
       <Grid container spacing={4}>
           <Grid  item sm={12}  spacing={4}>
-            {console.log("json",FullDateFrom,FullDateTo)}
-            <TestComp DateFrom={FullDateFrom} DateTo={FullDateTo} SensId={SensorId} TimeFrom={FullTimeFrom} TimeTo={FullTimeTo}/>
+            <Vischart_hist zona={ZonaId} DateFrom={FullDateFrom} DateTo={FullDateTo} TimeFrom={FullTimeFrom} TimeTo={FullTimeTo} />
           </Grid >
-          
       </Grid>
       </div>
-      
     </div>
-    
   );
 }

@@ -16,7 +16,7 @@ const Storelist = ({payload}) => (
         {({ data, total, loading, error }) => {
             if (loading) { return <Loading />; }
             if (error) { return <p>ERROR</p>; }
-            console.log("data ->",data)
+            //console.log("data ->",data)
             var result = data.map(values => ({ Data: values.dat, Hour:Moment(values.createdAt).format('HH:mm DD/MM ') }));
             return (
             <div style={{ width: '100%', height: 350}}>
@@ -70,7 +70,7 @@ export default class Cuztomchart extends PureComponent {
    this.state = { s_uid: '11', t_uid:'12', sensors:[], };
     }
   handleChange1 = event => {
-    console.log("event",event)
+    //console.log("event",event)
      this.setState({ s_uid: event.target.value });
   };
   handleChange2 = event => {
@@ -87,10 +87,9 @@ export default class Cuztomchart extends PureComponent {
     return (
       <div>
           
-          <form  autoComplete="on" >
+          <form >
             <FormControl >
               <FormHelperText>Select sensor</FormHelperText>
-
               <Select
                 label="With placeholder"
                 value={this.state.s_uid}
@@ -103,14 +102,9 @@ export default class Cuztomchart extends PureComponent {
               </Select>
             </FormControl>
           </form>
-
-        
         
       <div style={{ width: '90%', height: 350 ,background:'white',padding:'20px','borderRadius':'10px',margin: '20px'} }>
-        
-        
         <div>
-
         <Storelist payload={payload}/>
         </div>
       </div>
